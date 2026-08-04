@@ -1,0 +1,14 @@
+[
+  "alerts",
+  "argocd",
+  "eal",
+  "embeddings",
+  "infrastructure",
+  "kubernetes",
+  "kustomize",
+  "observability",
+  "pgvector",
+  "rust",
+  "semantic-search",
+  "terraform"
+]

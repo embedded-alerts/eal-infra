@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "organization": "embedded-alerts",
+  "services": [
+    "eal-api",
+    "eal-mash-web",
+    "eal-leptos-web",
+    "eal-dioxus-web",
+    "eal-sync"
+  ]
+}
