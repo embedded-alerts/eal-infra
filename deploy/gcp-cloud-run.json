@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "ores.gcp-cloud-run.org.v1",
+  "organization": "embedded-alerts",
+  "infraRepository": "embedded-alerts/eal-infra",
+  "canonicalDeploymentRepository": "ORESoftware/k8s-cluster",
+  "centralModulePath": "gcp/cloud-run-rust-service",
+  "gcp": { "projectId": null, "region": "us-central1", "state": "planned" },
+  "services": [
+    { "role": "web-server", "repository": "embedded-alerts/eal-web-server.rs", "serviceName": "eal-web-server", "repositoryState": "present" },
+    { "role": "admin-web-server", "repository": "embedded-alerts/eal-admin-web-server.rs", "serviceName": "eal-admin-web-server", "repositoryState": "present" },
+    { "role": "api-server", "repository": "embedded-alerts/eal-api-server.rs", "serviceName": "eal-api-server", "repositoryState": "present" },
+    { "role": "admin-api-server", "repository": "embedded-alerts/eal-admin-api-server.rs", "serviceName": "eal-admin-api-server", "repositoryState": "present" }
+  ],
+  "probes": {
+    "startup": { "path": "/readyz", "failureStatus": 503 },
+    "liveness": { "path": "/healthz", "dependencyFree": true },
+    "readiness": { "path": "/readyz", "failureStatus": 503 },
+    "buildIdentity": { "path": "/version", "cacheControl": "no-store" },
+    "metrics": { "path": "/metrics", "exposure": "private" }
+  },
+  "runtime": { "minInstances": 0, "maxInstances": 10, "imagePolicy": "digest-only", "serviceAccountPolicy": "per-service" },
+  "kubernetes": { "startupPath": "/healthz", "livenessPath": "/healthz", "readinessPath": "/readyz" },
+  "neon": { "organization": "embedded-alerts", "project": "embedded-alerts-prod", "database": "app", "state": "pending-external-provisioning" }
+}
