@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "githubOrg": "embedded-alerts",
+  "expectedState": "paused",
+  "mapping": {
+    "neonOrg": "org-small-hat-11852457",
+    "supabaseOrg": "fkegxrgqoryduzeibsao",
+    "cloudflareDomain": null,
+    "slackChannel": "C0BRKGEMRB7",
+    "gcpProject": "embedded-alerts",
+    "linearProject": "fa527793-877f-4d09-8331-682df0684915"
+  },
+  "areas": [
+    {
+      "role": "canonical",
+      "vpcId": null,
+      "region": null,
+      "sourceSecurityGroup": null,
+      "workloadIdentity": null,
+      "credentialRef": null
+    },
+    {
+      "role": "auth",
+      "vpcId": null,
+      "region": null,
+      "sourceSecurityGroup": null,
+      "workloadIdentity": null,
+      "credentialRef": null
+    },
+    {
+      "role": "admin",
+      "vpcId": null,
+      "region": null,
+      "sourceSecurityGroup": null,
+      "workloadIdentity": null,
+      "credentialRef": null
+    }
+  ],
+  "projects": [
+    {
+      "provider": "neon",
+      "role": "canonical",
+      "projectId": "snowy-math-08503056",
+      "region": "us-east-1",
+      "endpointIds": null
+    },
+    {
+      "provider": "neon",
+      "role": "auth",
+      "projectId": "sparkling-cherry-10132967",
+      "region": "us-east-1",
+      "endpointIds": null
+    },
+    {
+      "provider": "neon",
+      "role": "admin",
+      "projectId": "odd-lab-79486091",
+      "region": "us-east-1",
+      "endpointIds": null
+    },
+    {
+      "provider": "supabase",
+      "role": "canonical",
+      "projectId": "mxveuewagtpbpyfsbumi",
+      "region": "us-east-2",
+      "endpointIds": null
+    },
+    {
+      "provider": "supabase",
+      "role": "auth",
+      "projectId": "olenvsgkelgivtqpxclg",
+      "region": "us-east-2",
+      "endpointIds": null
+    },
+    {
+      "provider": "supabase",
+      "role": "admin",
+      "projectId": null,
+      "region": null,
+      "endpointIds": null
+    }
+  ]
+}
