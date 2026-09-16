@@ -2,11 +2,19 @@ name: neon-contract
 on:
   pull_request:
     paths:
+      - ".ores-infra.toml"
+      - "modules/neon/**"
+      - "environments/**"
+      - "docs/neon-modules-first-migration.md"
       - "neon/**"
       - ".github/workflows/neon-contract.yml"
   push:
     branches: [main]
     paths:
+      - ".ores-infra.toml"
+      - "modules/neon/**"
+      - "environments/**"
+      - "docs/neon-modules-first-migration.md"
       - "neon/**"
       - ".github/workflows/neon-contract.yml"
 
@@ -29,7 +37,24 @@ jobs:
         with:
           terraform_version: 1.12.1
           terraform_wrapper: false
-      - run: terraform -chdir=neon/embedded-alerts-prod/terraform fmt -check
-      - run: terraform -chdir=neon/embedded-alerts-prod/terraform init -backend=false -lockfile=readonly -input=false
-      - run: terraform -chdir=neon/embedded-alerts-prod/terraform validate
+      - name: Format modules-first Terraform
+        run: |
+          terraform fmt -check -recursive modules/neon/terraform
+          terraform fmt -check -recursive environments
+      - name: Validate every environment without backend or credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          for environment in preview staging production; do
+            terraform -chdir="environments/${environment}" init -backend=false -lockfile=readonly -input=false
+            terraform -chdir="environments/${environment}" validate
+          done
+      - name: Reject tracked state and private-key material
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E '(^|/)(terraform\.tfstate(\..*)?|[^/]+\.(pem|key))$'; then
+            echo "tracked Terraform state/private key material is forbidden" >&2
+            exit 1
+          fi
       - run: git diff --exit-code
